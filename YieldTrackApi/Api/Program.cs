@@ -1,8 +1,12 @@
+using Infrastructure.IoC;
+
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddInfra(config);
 
 var app = builder.Build();
 
