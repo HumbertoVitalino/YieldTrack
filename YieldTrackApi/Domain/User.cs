@@ -1,11 +1,12 @@
 ﻿namespace Domain;
 
 public class User(
+    Guid? id,
     string name,
     string email,
     byte[] passwordHash,
     byte[] passwordSalt
-) : Entity()
+) : Entity(id)
 {
     public string Name { get; private set; } = name;
     public string Email { get; private set; } = email;

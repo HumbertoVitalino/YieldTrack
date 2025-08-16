@@ -1,11 +1,12 @@
 ﻿namespace Domain;
 
 public class UserInvestment(
+    Guid? id,
     Guid userId,
     Guid assetId,
     decimal quantity,
     DateTime purchaseDate
-) : Entity()
+) : Entity(id)
 {
     public Guid UserId { get; private set; } = userId;
     public Guid AssetId { get; private set; } = assetId;

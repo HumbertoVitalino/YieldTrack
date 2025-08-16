@@ -1,17 +1,10 @@
 ﻿namespace Domain;
 
-public abstract class Entity
+public abstract class Entity(Guid? id)
 {
-    public Guid Id { get; private set; }
-    public DateTime CreatedAt { get; private set; }
-    public DateTime UpdatedAt { get; private set; }
-
-    protected Entity()
-    {
-        Id = Guid.NewGuid();
-        CreatedAt = DateTime.Now;
-        UpdatedAt = DateTime.Now;
-    }
+    public Guid Id { get; private set; } = id ?? Guid.NewGuid();
+    public DateTime CreatedAt { get; private set; } = DateTime.Now;
+    public DateTime UpdatedAt { get; private set; } = DateTime.Now;
 
     protected void SetUpdatedAt() => UpdatedAt = DateTime.Now;
 }

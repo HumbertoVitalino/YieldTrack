@@ -1,11 +1,12 @@
 ﻿namespace Domain;
 
 public class PriceHistory(
+    Guid? id,
     Guid assetId,
     DateTime referenceDate,
     decimal price,
     decimal rate
-) : Entity()
+) : Entity(id)
 {
     public Guid AssetId { get; private set; } = assetId;
     public DateTime ReferenceDate { get; private set; } = referenceDate;

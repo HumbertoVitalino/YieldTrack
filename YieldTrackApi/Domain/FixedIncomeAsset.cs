@@ -1,6 +1,7 @@
 ﻿namespace Domain;
 
 public class FixedIncomeAsset(
+    Guid? id,
     string code,
     string name,
     string issuer,
@@ -8,7 +9,7 @@ public class FixedIncomeAsset(
     DateTime maturityDate,
     decimal currentRate,
     string rateType
-    ) : Entity()
+    ) : Entity(id)
 {
     public string Code { get; private set; } = code;
     public string Name { get; private set; } = name;
@@ -21,5 +22,4 @@ public class FixedIncomeAsset(
     private List<UserInvestment> _investments = [];
     public IReadOnlyCollection<PriceHistory> PriceHistory => _priceHistory;
     public IReadOnlyCollection<UserInvestment> UserInvestments => _investments;
-
 }
