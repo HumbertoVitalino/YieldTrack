@@ -1,16 +1,29 @@
-﻿using Infrastructure.Repositories.Models;
+﻿using Application.Interfaces.Repositories;
+using Infrastructure.Repositories.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
 public class YieldTrackContext(
     DbContextOptions<YieldTrackContext> options
-) : DbContext(options)
+) : DbContext(options), IUnitOfWork
 {
     public DbSet<FixedIncomeAsset> FixedIncomeAssets { get; private set; } = default!;
     public DbSet<PriceHistory> PriceHistories { get; private set; } = default!;
     public DbSet<User> Users { get; private set; } = default!;
     public DbSet<UserInvestment> UserInvestments { get; private set; } = default!;
+
+    public async Task<bool> CommitAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await base.SaveChangesAsync(cancellationToken) > 0;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
