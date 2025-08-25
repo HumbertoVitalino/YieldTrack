@@ -1,5 +1,6 @@
 ﻿using Application.Commons;
 using Application.UseCases.CreateUser.Boundaries;
+using Application.UseCases.LoginUser.Boundaries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,5 +26,19 @@ public class UsersController(
             return BadRequest(output);
 
         return StatusCode(StatusCodes.Status201Created, output);
+    }
+
+    [HttpPost("login")]
+    [ProducesResponseType(typeof(Output), StatusCodes.Status202Accepted)]
+    [ProducesResponseType(typeof(Output), StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> LoginAsync([FromBody] LoginUserInput request, CancellationToken cancellationToken)
+    {
+        var output = await _mediator.Send(request, cancellationToken);
+
+        if (!output.IsValid)
+            return Unauthorized(output);
+
+        return Accepted(output);
     }
 }
