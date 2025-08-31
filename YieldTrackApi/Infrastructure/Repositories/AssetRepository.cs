@@ -11,7 +11,7 @@ public class AssetRepository(YieldTrackContext context) : Repository<FixedIncome
     {
         var asset = await _context.FixedIncomeAssets
             .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Code.Equals(code), cancellationToken);
+            .FirstOrDefaultAsync(x => x.Code == code, cancellationToken);
 
         return asset?.MapToDomain();
     }

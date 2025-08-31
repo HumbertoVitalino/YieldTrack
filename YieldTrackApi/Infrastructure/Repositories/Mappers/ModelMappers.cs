@@ -16,8 +16,8 @@ public static class ModelMappers
     public static Models.FixedIncomeAsset MapToModel(this Domain.FixedIncomeAsset asset) =>
         new(
             asset.Id,
-            asset.Code,
             asset.Name,
+            asset.Code,
             asset.Issuer,
             asset.MaturityDate,
             asset.FaceValue,
