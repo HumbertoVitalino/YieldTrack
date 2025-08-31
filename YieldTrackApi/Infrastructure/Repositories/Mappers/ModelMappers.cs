@@ -12,4 +12,18 @@ public static class ModelMappers
             user.CreatedAt,
             user.UpdatedAt
         );
+
+    public static Models.FixedIncomeAsset MapToModel(this Domain.FixedIncomeAsset asset) =>
+        new(
+            asset.Id,
+            asset.Code,
+            asset.Name,
+            asset.Issuer,
+            asset.MaturityDate,
+            asset.FaceValue,
+            asset.CurrentRate,
+            asset.RateType,
+            asset.CreatedAt,
+            asset.UpdatedAt
+        );
 }

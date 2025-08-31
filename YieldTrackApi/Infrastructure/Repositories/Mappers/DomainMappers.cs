@@ -10,4 +10,16 @@ public static class DomainMappers
             model.PasswordHash,
             model.PasswordSalt
         );
+
+    public static Domain.FixedIncomeAsset MapToDomain(this Models.FixedIncomeAsset model) =>
+        new(
+            model.Id,
+            model.Code,
+            model.Name,
+            model.Issuer,
+            model.FaceValue,
+            model.MaturityDate,
+            model.CurrentRate,
+            model.RateType
+        );
 }
