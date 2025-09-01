@@ -22,4 +22,7 @@ public static class DomainMappers
             model.CurrentRate,
             model.RateType
         );
+
+    public static IEnumerable<Domain.FixedIncomeAsset> MapToDomain(this IEnumerable<Models.FixedIncomeAsset> models) =>
+        models.Select(x => x.MapToDomain());
 }
