@@ -16,6 +16,24 @@ public class AssetRepository(YieldTrackContext context) : Repository<FixedIncome
         return asset?.MapToDomain();
     }
 
+    public async Task<IEnumerable<FixedIncomeAsset>> GetAsync(CancellationToken cancellationToken)
+    {
+        var assets = await _context.FixedIncomeAssets
+            .AsNoTracking()
+            .ToListAsync(cancellationToken);
+
+        return assets.MapToDomain();
+    }
+
+    public async Task<FixedIncomeAsset?> GetAsync(Guid id, CancellationToken cancellationToken)
+    {
+        var asset = await _context.FixedIncomeAssets
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+
+        return asset?.MapToDomain();
+    }
+
     public async Task InsertAsync(FixedIncomeAsset asset, CancellationToken cancellationToken)
     {
         await _context.AddAsync(asset.MapToModel(), cancellationToken);
