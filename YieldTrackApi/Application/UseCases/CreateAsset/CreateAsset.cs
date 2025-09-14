@@ -15,17 +15,12 @@ public sealed class CreateAsset(
     {
         Output output = new();
 
-        var existingAsset = await _assetRepository.GetAsync(input.Code, cancellationToken);
+        var asset = input.MapToDomain();
+        asset.CreatePriceHistory();
 
-        if (existingAsset is not null)
-        {
-            output.AddErrorMessage("Asset with the same code already exists.");
-            return output;
-        }
+        await _assetRepository.UpsertAsync(asset, cancellationToken);
 
-        await _assetRepository.InsertAsync(input.MapToDomain(), cancellationToken);
         var saved = await _assetRepository.UnitOfWork.CommitAsync(cancellationToken);
-
         if (!saved)
         {
             output.AddErrorMessage("Failed to save the asset.");
