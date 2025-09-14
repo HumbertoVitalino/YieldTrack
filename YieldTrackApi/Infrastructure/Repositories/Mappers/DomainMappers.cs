@@ -25,4 +25,16 @@ public static class DomainMappers
 
     public static IEnumerable<Domain.FixedIncomeAsset> MapToDomain(this IEnumerable<Models.FixedIncomeAsset> models) =>
         models.Select(x => x.MapToDomain());
+
+    public static Domain.PriceHistory MapToDomain(this Models.PriceHistory model) =>
+        new(
+            model.Id,
+            model.AssetId,
+            model.ReferenceDate,
+            model.Price,
+            model.Rate
+        );
+
+    public static IEnumerable<Domain.PriceHistory> MapToDomain(this IEnumerable<Models.PriceHistory> models) =>
+        models.Select(x => x.MapToDomain());
 }
