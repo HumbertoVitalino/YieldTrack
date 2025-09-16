@@ -27,8 +27,8 @@ public class FixedIncomeAsset : Model
     [Required]
     public string RateType { get; private set; } = default!;
 
-    public ICollection<PriceHistory> PriceHistory { get; private set; } = [];
-    public ICollection<UserInvestment> Investments { get; private set; } = [];
+    public List<PriceHistory> PriceHistory { get; private set; } = [];
+    public List<UserInvestment> Investments { get; private set; } = [];
 
     protected FixedIncomeAsset() { }
 
@@ -53,4 +53,7 @@ public class FixedIncomeAsset : Model
         CurrentRate = currentRate;
         RateType = rateType;
     }
+
+    public void AddPriceHistory(IEnumerable<PriceHistory> priceHistories) => PriceHistory.AddRange(priceHistories);
+    
 }

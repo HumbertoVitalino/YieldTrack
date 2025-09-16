@@ -22,4 +22,17 @@ public class FixedIncomeAsset(
     private List<UserInvestment> _investments = [];
     public IReadOnlyCollection<PriceHistory> PriceHistory => _priceHistory;
     public IReadOnlyCollection<UserInvestment> UserInvestments => _investments;
+
+    public void CreatePriceHistory()
+    {
+        PriceHistory price = new(
+            id: Guid.Empty,
+            assetId: Id,
+            referenceDate: DateTime.Now,
+            price: FaceValue,
+            rate: CurrentRate
+        );
+        price.AddAsset(this);
+        _priceHistory.Add(price);
+    }
 }
