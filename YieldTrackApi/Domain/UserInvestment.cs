@@ -5,13 +5,15 @@ public class UserInvestment(
     Guid userId,
     Guid assetId,
     decimal quantity,
-    DateTime purchaseDate
+    DateTime purchaseDate,
+    DateTime dueDate
 ) : Entity(id)
 {
     public Guid UserId { get; private set; } = userId;
     public Guid AssetId { get; private set; } = assetId;
     public decimal Quantity { get; private set; } = quantity;
     public DateTime PurchaseDate { get; private set; } = purchaseDate;
+    public DateTime DueDate { get; private set; } = dueDate;
     private User _user = default!;
     private FixedIncomeAsset _asset = default!;
     public User User => _user;
